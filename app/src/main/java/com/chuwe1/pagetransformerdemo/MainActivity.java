@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void transformPage(View page, float position) {
-                Log.e((String) page.getTag(), position + "");
+//                String ss = String.format("%1.5f", position);   //1.13
+//                Log.e("xhw", ss);
                 /*
                  *          左2    左侧页面（左1）  当前页面   右侧页面（右1）  右2
                  * 左滑： -3 <- -2   -2 <- -1     -1 <- 0     0 <- 1      1 <- 2
@@ -73,21 +75,34 @@ public class MainActivity extends AppCompatActivity {
                     page.setScaleY(0);
                     page.setTranslationX(0);
                 } else {
+                    //左边的view
                     if (-1 <= position && position < 0) {
+                        int pageTransX= (int) page.getTranslationX();
+                        int pageX= (int) page.getX();
+                        String ss = String.format("%1.5f", position);   //1.13
+                        Log.e("xhw","-1~0 position:" +ss+" pageX "+pageX+" pageXTransX "+pageTransX);
                         page.setAlpha(1 + position - MIN_ALPHA * position);
 
                         page.setScaleX(1);
                         page.setScaleY(1);
 
                         page.setTranslationX(0);
-                    } else if (0 < position && position <= 1) {
+                    } else if (0 < position && position <= 1) {//右边的view
+                        int pageTransX= (int) page.getTranslationX();
+                        int pageX= (int) page.getX();
+                        String ss = String.format("%1.5f", position);   //1.13
+                        Log.v("xhw","0~1 position:" +ss+" pageX "+pageX+" pageTransX="+pageTransX);
+
+
                         page.setAlpha(1 - position + MIN_ALPHA * position);
 
                         float scaleFactor = 1 - position + MIN_SCALE * position;
                         page.setScaleX(scaleFactor);
                         page.setScaleY(scaleFactor);
-
+                        page.setTranslationX(0);
+//                        page.setTranslationX(page.getWidth() * position);
                         page.setTranslationX(-page.getWidth() * position);
+
                     } else {
                         page.setAlpha(1f);
                         page.setScaleX(1);
