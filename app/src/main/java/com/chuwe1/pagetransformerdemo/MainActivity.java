@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(5);
 
         viewPager.setAdapter(new PagerAdapter() {
@@ -80,28 +80,29 @@ public class MainActivity extends AppCompatActivity {
                         int pageTransX= (int) page.getTranslationX();
                         int pageX= (int) page.getX();
                         String ss = String.format("%1.5f", position);   //1.13
-                        Log.e("xhw","-1~0 position:" +ss+" pageX "+pageX+" pageXTransX "+pageTransX);
+//                        Log.e("xhw","-1~0 position:" +ss+" pageX "+pageX+" pageXTransX "+pageTransX);
                         page.setAlpha(1 + position - MIN_ALPHA * position);
 
                         page.setScaleX(1);
                         page.setScaleY(1);
-
-                        page.setTranslationX(0);
+//                        page.setTranslationX(page.getWidth() * position);
+//                        page.setTranslationX(0);
                     } else if (0 < position && position <= 1) {//右边的view
                         int pageTransX= (int) page.getTranslationX();
                         int pageX= (int) page.getX();
+                        int pageScrollX= (int) viewPager.getScrollX();
                         String ss = String.format("%1.5f", position);   //1.13
-                        Log.v("xhw","0~1 position:" +ss+" pageX "+pageX+" pageTransX="+pageTransX);
 
+                        int leftMargin=page.getLeft();
 
                         page.setAlpha(1 - position + MIN_ALPHA * position);
 
                         float scaleFactor = 1 - position + MIN_SCALE * position;
-                        page.setScaleX(scaleFactor);
-                        page.setScaleY(scaleFactor);
-                        page.setTranslationX(0);
-//                        page.setTranslationX(page.getWidth() * position);
-                        page.setTranslationX(-page.getWidth() * position);
+//                        page.setScaleX(scaleFactor);
+//                        page.setScaleY(scaleFactor);
+                        float vlaue=-page.getWidth() * position;
+//                        page.setTranslationX(vlaue);
+                        Log.v("xhw","0~1 position:" +ss+" pageX "+pageX+" pageTransX="+pageTransX+" leftMargin="+leftMargin+" pageScrollX="+pageScrollX+" vlaue="+vlaue);
 
                     } else {
                         page.setAlpha(1f);
