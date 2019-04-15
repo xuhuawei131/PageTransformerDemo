@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         page.setScaleX(1);
                         page.setScaleY(1);
 //                        page.setTranslationX(page.getWidth() * position);
-//                        page.setTranslationX(0);
+                        page.setTranslationX(0);
                     } else if (0 < position && position <= 1) {//右边的view
                         int pageTransX= (int) page.getTranslationX();
                         int pageX= (int) page.getX();
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 //                        page.setScaleX(scaleFactor);
 //                        page.setScaleY(scaleFactor);
                         float vlaue=-page.getWidth() * position;
-//                        page.setTranslationX(vlaue);
+                        page.setTranslationX(vlaue);
                         Log.v("xhw","0~1 position:" +ss+" pageX "+pageX+" pageTransX="+pageTransX+" leftMargin="+leftMargin+" pageScrollX="+pageScrollX+" vlaue="+vlaue);
 
                     } else {
